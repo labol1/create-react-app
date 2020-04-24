@@ -535,6 +535,20 @@ module.exports = function(webpackEnv) {
                 'sass-loader'
               ),
             },
+            {
+              test: /\.yaml$/,
+              type: 'json',
+              oneOf: [
+                {
+                  resourceQuery: /stream/,
+                  options: { asStream: true },
+                  loader: require.resolve('yaml-loader')
+                },
+                {
+                  loader: require.resolve('yaml-loader')
+                }
+              ]
+            },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.
